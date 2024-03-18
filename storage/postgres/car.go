@@ -34,17 +34,18 @@ func (c *carRepo) Create(car models.Car) (string, error) {
 	query := ` INSERT INTO cars (
 		id,
 		name,
+		year,
 		brand,
 		model,
 		hourse_power,
 		colour,
 		engine_cap)
-		VALUES($1,$2,$3,$4,$5,$6,$7) 
+		VALUES($1,$2,$3,$4,$5,$6,$7,$8) 
 	`
 
 	_, err := c.db.Exec(query,
 		id.String(),
-		car.Name, car.Brand,
+		car.Name, car.Year, car.Brand,
 		car.Model, car.HoursePower,
 		car.Colour, car.EngineCap)
 
@@ -59,17 +60,18 @@ func (c *carRepo) Update(car models.Car) (string, error) {
 
 	query := ` UPDATE cars set
 			name=$1,
-			brand=$2,
-			model=$3,
-			hourse_power=$4,
-			colour=$5,
-			engine_cap=$6,
+			year=$2
+			brand=$3,
+			model=$4,
+			hourse_power=$5,
+			colour=$6,
+			engine_cap=$7,
 			updated_at=CURRENT_TIMESTAMP
-		WHERE id = $7 AND deleted_at=0
+		WHERE id = $8 AND deleted_at=0
 	`
 
 	_, err := c.db.Exec(query,
-		car.Name, car.Brand,
+		car.Name, car.Year, car.Brand,
 		car.Model, car.HoursePower,
 		car.Colour, car.EngineCap, car.Id)
 
@@ -90,9 +92,6 @@ func (c carRepo) GetAll(req models.GetAllCarsRequest) (models.GetAllCarsResponse
 	if req.Search != "" {
 		filter += fmt.Sprintf(` and name ILIKE  '%%%v%%' `, req.Search)
 	}
-
-
-	
 
 	filter += fmt.Sprintf(" OFFSET %v LIMIT %v", offset, req.Limit)
 	fmt.Println("filter: ", filter)

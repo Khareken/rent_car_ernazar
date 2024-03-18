@@ -50,6 +50,12 @@ func (c Controller) CreateCar(w http.ResponseWriter, r *http.Request) {
 		handleResponse(w, http.StatusBadRequest, errStr)
 		return
 	}
+	if car.Year == 0 {
+		errStr := "year is required"
+		fmt.Println(errStr)
+		handleResponse(w, http.StatusBadRequest, errStr)
+		return
+	}
 	if err := check.ValidateCarYear(car.Year); err != nil {
 		fmt.Println("error while validating year: ", car.Year)
 		handleResponse(w, http.StatusBadRequest, err)

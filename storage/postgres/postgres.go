@@ -36,3 +36,8 @@ func (s Store) Car() storage.ICarStorage {
 	return &newCar
 }
 
+func (s Store) Customer() storage.ICustomerStorage {
+	newCustomer := NewCustomer(s.DB)
+
+	return &newCustomer
+}

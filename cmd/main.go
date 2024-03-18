@@ -20,7 +20,7 @@ func main() {
 	con := controller.NewController(store)
 
 	http.HandleFunc("/car", con.Car)
-
+	http.HandleFunc("/customer", con.Customer)
 	fmt.Println("programm is running on localhost:8008...")
 	http.ListenAndServe(":8008", nil)
 

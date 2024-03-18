@@ -12,7 +12,7 @@ CREATE TABLE IF NOT EXISTS cars (
     deleted_at INTEGER DEFAULT 0
 );
 
-CREATE TABLE IF NOT EXISTS customers {
+CREATE TABLE IF NOT EXISTS customers (
     id uuid PRIMARY KEY DEFAULT gen_random_uuid(),
     first_name VARCHAR(50) NOT NULL,
     last_name VARCHAR(50),
@@ -22,5 +22,17 @@ CREATE TABLE IF NOT EXISTS customers {
     created_at TIMESTAMP DEFAULT NOW(),
     updated_at TIMESTAMP,
     deleted_at INTEGER DEFAULT 0
-}
+);
+
+CREATE TABLE IF NOT EXISTS orders (
+    id uuid PRIMARY KEY DEFAULT gen_random_uuid(),
+    carid VARCHAR(50) NOT NULL,
+    last_name VARCHAR(50),
+    gmail VARCHAR(50) NOT NULL,--NEED VALIDATION
+    phone VARCHAR(20) NOT NULL,--NEED VALIDATION
+    is_blocked BOOLEAN NOT NULL DEFAULT FALSE,
+    created_at TIMESTAMP DEFAULT NOW(),
+    updated_at TIMESTAMP,
+    deleted_at INTEGER DEFAULT 0
+);
 

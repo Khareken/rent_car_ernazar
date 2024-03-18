@@ -16,3 +16,9 @@ type GetAllCustomersResponse struct {
 	Customers []Customer `json:"customers"`
 	Count     int16      `json:"count"`
 }
+
+type GetAllCustomerRequest struct {
+	Search string `json:"search"`
+	Page   uint64 `json:"page"`
+	Limit  uint64 `json:"limit`
+}
