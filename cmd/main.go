@@ -2,9 +2,8 @@ package main
 
 import (
 	"fmt"
-	"net/http"
+	"rent-car/api"
 	"rent-car/config"
-	"rent-car/controller"
 	"rent-car/storage/postgres"
 )
 
@@ -16,12 +15,9 @@ func main() {
 		return
 	}
 	defer store.CloseDB()
+	c := api.NewCarApi(store)
 
-	con := controller.NewController(store)
-
-	http.HandleFunc("/car", con.Car)
-	http.HandleFunc("/customer", con.Customer)
 	fmt.Println("programm is running on localhost:8008...")
-	http.ListenAndServe(":8008", nil)
+	c.Run(":8080")
 
 }

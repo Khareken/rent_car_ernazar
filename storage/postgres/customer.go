@@ -3,7 +3,7 @@ package postgres
 import (
 	"database/sql"
 	"fmt"
-	"rent-car/models"
+	"rent-car/api/models"
 	"rent-car/pkg"
 
 	"github.com/google/uuid"
